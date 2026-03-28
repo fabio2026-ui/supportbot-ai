@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupportBot AI - Instant Customer Support</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            color: #333;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        .chat-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 200px;
+            border: 2px solid #e9ecef;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .plan {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s;
+        }
+        .plan:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+        }
+        .plan h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        .features {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .features li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .features li:before {
+            content: "✓";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .stat {
+            flex: 1;
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 SupportBot AI</h1>
+        <div class="subtitle">Instant 24/7 Customer Support • AI-Powered Answers</div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Questions Answered</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Satisfaction Rate</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Availability</div>
+            </div>
+        </div>
+        
+        <h2>Try SupportBot Now</h2>
+        <div class="chat-box" id="chatBox">
+            <p>👋 Hello! I'm SupportBot AI. How can I help you today?</p>
+            <p>Try asking: "How do I get started?" or "What are your pricing plans?"</p>
+        </div>
+        
+        <div class="input-group">
+            <input type="email" id="emailInput" placeholder="Your email (for response)" value="test@example.com">
+            <textarea id="questionInput" placeholder="Type your question here..." rows="2">How do I get started with SupportBot?</textarea>
+            <button onclick="askQuestion()">Ask SupportBot</button>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="#pricing" class="cta-button">Get Started Free for 14 Days</a>
+        </div>
+        
+        <h2 id="pricing">Simple Pricing, Big Results</h2>
+        <div class="pricing">
+            <div class="plan">
+                <h3>Starter</h3>
+                <div class="price">$49<span style="font-size: 0.5em;">/month</span></div>
+                <div class="features">
+                    <ul>
+                        <li>1,000 questions/month</li>
+                        <li>Basic knowledge base</li>
+                        <li>Email support</li>
+                        <li>API access</li>
+                    </ul>
+                </div>
+                <a href="#" class="cta-button">Start Free Trial</a>
+            </div>
+            
+            <div class="plan" style="border-color: #667eea; transform: scale(1.05);">
+                <h3>Professional</h3>
+                <div class="price">$149<span style="font-size: 0.5em;">/month</span></div>
+                <div class="features">
+                    <ul>
+                        <li>5,000 questions/month</li>
+                        <li>Advanced knowledge base</li>
+                        <li>Priority support</li>
+                        <li>Custom training</li>
+                        <li>Analytics dashboard</li>
+                    </ul>
+                </div>
+                <a href="#" class="cta-button" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">Most Popular</a>
+            </div>
+            
+            <div class="plan">
+                <h3>Enterprise</h3>
+                <div class="price">$299<span style="font-size: 0.5em;">/month</span></div>
+                <div class="features">
+                    <ul>
+                        <li>Unlimited questions</li>
+                        <li>Enterprise knowledge base</li>
+                        <li>24/7 phone support</li>
+                        <li>White-label solution</li>
+                        <li>Custom integration</li>
+                    </ul>
+                </div>
+                <a href="#" class="cta-button">Contact Sales</a>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+            <h3>💰 Start Earning Today</h3>
+            <p><strong>Typical ROI:</strong> Save $2,000-$10,000/month on support costs</p>
+            <p><strong>Setup Time:</strong> 15 minutes</p>
+            <p><strong>Payback Period:</strong> Less than 1 week</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="window.location.href='mailto:sales@supportbot.ai?subject=Interested in SupportBot AI&body=Hi, I would like to learn more about SupportBot AI.'" style="background: #28a745; padding: 15px 40px; font-size: 1.2em;">
+                    📧 Contact for Immediate Setup
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2026 SupportBot AI. All rights reserved.</p>
+            <p>Ready to start? Email: <strong>sales@supportbot.ai</strong> | Call: <strong>+1 (555) 123-4567</strong></p>
+        </footer>
+    </div>
+    
+    <script>
+        function askQuestion() {
+            const email = document.getElementById('emailInput').value;
+            const question = document.getElementById('questionInput').value;
+            const chatBox = document.getElementById('chatBox');
+            
+            if (!email || !question) {
+                alert('Please enter both email and question');
+                return;
+            }
+            
+            // 显示用户问题
+            chatBox.innerHTML += `<p><strong>You:</strong> ${question}</p>`;
+            
+            // 模拟AI思考
+            setTimeout(() => {
+                // 这里应该调用后端API，现在用模拟回答
+                const responses = [
+                    `Great question about "${question}"! Based on our experience, here's what works best:
+
+1. Start with our free trial
+2. Upload your documentation
+3. Train the AI with your specific questions
+4. Integrate into your website
+
+Would you like me to send the setup guide to ${email}?`,
+                    `I understand you're asking about "${question}". Most of our customers find success by:
+
+• Starting with the Professional plan ($149/month)
+• Setting up in under 15 minutes
+• Seeing results within the first week
+
+Shall I connect you with our onboarding specialist?`,
+                    `For "${question}", we recommend:
+
+✅ Begin with 14-day free trial
+✅ Import your existing FAQs
+✅ Test with real customer questions
+✅ Scale as needed
+
+Ready to get started?`
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                chatBox.innerHTML += `<p><strong>SupportBot AI:</strong> ${randomResponse.replace(/\n/g, '<br>')}</p>`;
+                
+                // 滚动到底部
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                // 显示成功消息
+                alert(`✅ Question sent! We'll also email the answer to ${email}`);
+                
+            }, 1000);
+        }
+        
+        // 预加载一些示例对话
+        window.onload = function() {
+            const examples = [
+                "How much does it cost?",
+                "Can I try it for free?",
+                "How do I integrate with my website?",
+                "What kind of support do you offer?"
+            ];
+            
+            const questionInput = document.getElementById('questionInput');
+            let exampleIndex = 0;
+            
+            // 每5秒切换示例问题
+            setInterval(() => {
+                questionInput.placeholder = `Try asking: "${examples[exampleIndex]}"`;
+                exampleIndex = (exampleIndex + 1) % examples.length;
+            }, 5000);
+        };
+    </script>
+</body>
+</html>
