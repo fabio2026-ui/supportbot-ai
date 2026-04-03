@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "created_at": "2026-04-03T16:32:36.255695",
+  "status": "active",
+  "addresses": {
+    "bitcoin": "bc1qnay69verr63h74tc8h3tvpg7gvjpktj336gmsf",
+    "ethereum": "0xd43b2D60B0b03cEcce6f71dDF765648dA511dAa98"
+  },
+  "currencies": {
+    "bitcoin": {
+      "symbol": "BTC",
+      "network": "Bitcoin Mainnet",
+      "address_type": "Bech32 (bc1)",
+      "confirmations_required": 3
+    },
+    "ethereum": {
+      "symbol": "ETH",
+      "network": "Ethereum Mainnet",
+      "address_type": "Standard",
+      "confirmations_required": 12
+    }
+  },
+  "payment_amounts": {
+    "monthly_subscription": 19.99,
+    "annual_subscription": 199.99,
+    "enterprise_plan": 499.99
+  },
+  "instructions": {
+    "customer": "发送相应金额的加密货币到指定地址",
+    "verification": "提供交易哈希以验证支付",
+    "activation": "确认后立即激活账户"
+  }
+}
