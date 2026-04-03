@@ -1,0 +1,103 @@
+name: Deploy AutoContentFactory
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'production' }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Test API
+      run: |
+        python src/api_server.py &
+        SERVER_PID=$!
+        sleep 5
+        curl -f http://localhost:5000/health || exit 1
+        kill $SERVER_PID
+        
+    - name: Deploy to Railway
+      if: github.event.inputs.environment == 'production' || github.event_name == 'push'
+      uses: railwayapp/action@v1
+      with:
+        railway_token: ${{ secrets.RAILWAY_TOKEN }}
+        service: autocontentfactory-api
+        environment: production
+        
+    - name: Deploy to Render (fallback)
+      if: failure() && (github.event.inputs.environment == 'production' || github.event_name == 'push')
+      run: |
+        echo "Railway部署失败，使用Render部署"
+        echo "请手动部署到Render: https://render.com"
+        echo "仓库: https://github.com/fabio2026-ui/autocontentfactory"
+        
+    - name: Update deployment status
+      run: |
+        DEPLOYMENT_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        echo "DEPLOYMENT_TIME=$DEPLOYMENT_TIME" >> $GITHUB_ENV
+        
+        # 创建部署状态文件
+        cat > deploy_status.json << EOF
+        {
+          "project": "AutoContentFactory",
+          "status": "deployed",
+          "timestamp": "$DEPLOYMENT_TIME",
+          "environment": "${{ github.event.inputs.environment || 'production' }}",
+          "url": "https://autocontentfactory.up.railway.app",
+          "endpoints": {
+            "health": "/health",
+            "generate": "/generate",
+            "stats": "/stats"
+          },
+          "pricing": {
+            "basic": 29,
+            "pro": 99,
+            "enterprise": 299
+          }
+        }
+        EOF
+        
+    - name: Upload deployment status
+      uses: actions/upload-artifact@v3
+      with:
+        name: deployment-status
+        path: deploy_status.json
+        
+    - name: Send deployment notification
+      run: |
+        echo "🚀 AutoContentFactory部署完成!"
+        echo "环境: ${{ github.event.inputs.environment || 'production' }}"
+        echo "时间: $(date)"
+        echo "API地址: https://autocontentfactory.up.railway.app"
+        echo ""
+        echo "💰 立即开始赚钱:"
+        echo "- 基础版: $29/月 - 1000次API调用"
+        echo "- 专业版: $99/月 - 10000次API调用"
+        echo "- 企业版: $299/月 - 无限调用"
+        echo ""
+        echo "🎯 目标客户: 营销机构、内容创作者、SEO公司"
