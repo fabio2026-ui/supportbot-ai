@@ -1,0 +1,11 @@
+# 排除嵌套Git仓库
+github-repos/
+llama.cpp/
+turboquant/
+ai-venv/
+__pycache__/
+*.pyc
+*.db
+*.log
+.env
+EOF && echo "✅ .gitignore已创建" && echo "" && echo "添加主要文件..." && git add AGENTS.md SOUL.md USER.md TOOLS.md MEMORY.md HEARTBEAT.md IDENTITY.md BOOTSTRAP.md supportbot_ai.html README.md && echo "✅ 主要文件已添加" && echo "" && echo "提交更改..." && git commit -m "Initial commit: Core workspace files and SupportBot AI"
