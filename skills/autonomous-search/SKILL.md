@@ -1,209 +1,518 @@
-# Autonomous Search Skill
+# 🔍 Autonomous Search Skill
 
-## 🎯 技能概述
-**技能名称**: autonomous-search  
-**技能类型**: 搜索优化与问题解决  
-**适用场景**: 需要自主搜索信息、分析问题、制定解决方案的任务
+## 📋 Overview
+智能自主搜索技能，能够自动分析问题、搜索解决方案并生成最佳实践。
 
-## 📋 核心功能
+## 🎯 Core Features
 
-### 1. 智能搜索优化
-- **上下文感知搜索**: 基于对话历史优化搜索关键词
-- **多源信息检索**: 同时搜索多个信息源
-- **结果智能筛选**: 基于可信度和相关性排序结果
-- **信息提取与总结**: 自动提取关键信息并生成摘要
+### 1. Problem Analysis
+- **智能问题理解**: 自动识别问题类型和复杂度
+- **关键词提取**: 从问题中提取关键搜索词
+- **约束识别**: 识别技术、时间、资源等约束条件
+- **优先级排序**: 根据紧急性和重要性排序问题
 
-### 2. 问题分析框架
-- **问题分解**: 将复杂问题分解为可管理的子问题
-- **约束识别**: 自动识别问题中的约束条件
-- **目标明确**: 澄清解决问题的具体目标
-- **资源评估**: 评估可用工具和资源
+### 2. Search Optimization
+- **多源搜索**: 同时搜索多个信息源
+- **结果过滤**: 基于相关性和可信度过滤结果
+- **去重处理**: 合并相似或重复的信息
+- **时效性检查**: 优先选择最新信息
 
-### 3. 解决方案生成
-- **多方案对比**: 生成多个解决方案并对比优劣
-- **风险评估**: 评估每个方案的风险和成本
-- **可行性分析**: 检查技术可行性和实施难度
-- **优先级排序**: 基于效果和效率排序方案
+### 3. Solution Generation
+- **方案合成**: 从搜索结果中合成完整解决方案
+- **步骤分解**: 将复杂方案分解为可执行步骤
+- **风险评估**: 评估不同方案的风险和成功率
+- **备选方案**: 提供多个备选解决方案
 
-## 🚀 使用方式
+### 4. Knowledge Management
+- **知识库构建**: 将解决方案保存到知识库
+- **经验积累**: 从成功和失败案例中学习
+- **模式识别**: 识别常见问题模式
+- **最佳实践**: 建立和更新最佳实践库
 
-### 基本调用
+## 🚀 Quick Start
+
+### Installation
+```bash
+# Clone the skill
+git clone https://github.com/fabio2026-ui/skills.git
+
+# Install dependencies
+cd skills/autonomous-search
+pip install -r requirements.txt
 ```
-用户: "帮我搜索关于OpenAI最新发展的信息"
-系统: [自动调用autonomous-search技能]
-```
 
-### 高级调用
-```
-用户: "分析我们项目的技术瓶颈并提出解决方案"
-系统: [自动调用问题分析功能]
-```
-
-## 🔧 技术实现
-
-### 1. 搜索优化算法
+### Basic Usage
 ```python
-def optimize_search(query, context):
-    """
-    优化搜索查询的算法
-    """
-    # 提取核心关键词
-    keywords = extract_keywords(query)
-    
-    # 基于上下文扩展
-    if context:
-        context_keywords = extract_from_context(context)
-        keywords.extend(context_keywords)
-    
-    # 语义扩展
-    semantic_expansion = get_semantic_related(keywords)
-    
-    # 生成优化后的查询
-    optimized = " ".join(set(keywords + semantic_expansion))
-    
-    return optimized
+from autonomous_search import AutonomousSearch
+
+# Initialize the search engine
+searcher = AutonomousSearch()
+
+# Search for solutions
+problem = "How to optimize Python code performance?"
+solutions = searcher.search_solutions(problem)
+
+print(f"Found {len(solutions)} solutions:")
+for solution in solutions:
+    print(f"- {solution['title']}")
+    print(f"  Confidence: {solution['confidence']}%")
 ```
 
-### 2. 问题分析引擎
+### OpenClaw Integration
 ```python
-class ProblemAnalyzer:
-    def __init__(self):
-        self.knowledge_base = load_knowledge_base()
+class AutonomousSearchOpenClawSkill:
+    def handle_request(self, request_data):
+        """Handle OpenClaw requests"""
+        query = request_data.get("query", "")
+        context = request_data.get("context", "")
         
-    def analyze(self, problem_description):
-        # 1. 问题分类
-        problem_type = classify_problem(problem_description)
+        # Analyze the problem
+        analysis = self.analyze_problem(query, context)
         
-        # 2. 约束提取
-        constraints = extract_constraints(problem_description)
+        # Search for solutions
+        solutions = self.search_solutions(analysis)
         
-        # 3. 目标明确
-        goals = extract_goals(problem_description)
-        
-        # 4. 生成分析报告
-        analysis_report = {
-            "problem_type": problem_type,
-            "constraints": constraints,
-            "goals": goals,
-            "complexity": estimate_complexity(problem_description)
+        # Generate response
+        response = {
+            "success": True,
+            "query": query,
+            "analysis": analysis,
+            "solutions": solutions,
+            "timestamp": datetime.now().isoformat()
         }
         
-        return analysis_report
+        return response
 ```
 
-## 📁 文件结构
+## ⚙️ Configuration
 
-```
-autonomous-search/
-├── SKILL.md                    # 技能文档
-├── scripts/
-│   ├── search_optimizer.py     # 搜索优化脚本
-│   ├── problem_analyzer.py     # 问题分析脚本
-│   └── solution_generator.py   # 解决方案生成脚本
-├── references/
-│   ├── search_patterns.md      # 搜索模式参考
-│   └── problem_templates.md    # 问题模板参考
-└── examples/
-    ├── basic_search.json       # 基础搜索示例
-    └── complex_analysis.json   # 复杂分析示例
+### Basic Configuration
+```python
+config = {
+    "search_engines": ["google", "github", "stackoverflow", "documentation"],
+    "max_results": 10,
+    "timeout_seconds": 30,
+    "cache_enabled": True,
+    "cache_ttl_hours": 24,
+    "language": "en",  # or 'zh', 'it', etc.
+}
 ```
 
-## 🎮 使用示例
-
-### 示例1: 技术问题搜索
-```
-输入: "Python异步编程的最佳实践"
-输出:
-1. 搜索优化: "Python asyncio best practices 2026 performance optimization"
-2. 结果筛选: 按相关性和时效性排序
-3. 信息提取: 提取关键概念和代码示例
-4. 总结: 生成结构化最佳实践列表
-```
-
-### 示例2: 商业问题分析
-```
-输入: "我们的SaaS产品用户留存率下降"
-输出:
-1. 问题分解: 
-   - 用户行为分析
-   - 产品功能评估
-   - 市场竞争分析
-2. 数据收集: 搜索相关案例和解决方案
-3. 方案生成:
-   - 优化用户体验
-   - 增加用户粘性功能
-   - 改进客户支持
-4. 风险评估: 评估每个方案的成本和效果
+### Advanced Configuration
+```python
+advanced_config = {
+    "ai_model": "gpt-4",  # or 'claude', 'gemini'
+    "confidence_threshold": 0.7,
+    "fallback_strategies": ["simplify_query", "broaden_search", "use_cached"],
+    "rate_limiting": {
+        "requests_per_minute": 30,
+        "requests_per_hour": 1000
+    }
+}
 ```
 
-## 📊 性能指标
+## 🔧 Error Handling Framework
 
-### 搜索性能
-- **准确率**: >90% (搜索结果与需求匹配度)
-- **召回率**: >85% (找到所有相关信息的能力)
-- **响应时间**: <3秒 (从查询到结果的时间)
-- **信息完整性**: >95% (覆盖所有关键信息)
+### Error Classification
+```python
+class SearchError(Exception):
+    """Base search error"""
+    pass
 
-### 问题解决性能
-- **问题识别准确率**: >95%
-- **方案有效性**: >90%
-- **执行成功率**: >85%
-- **用户满意度**: >90%
+class NetworkError(SearchError):
+    """Network-related errors"""
+    pass
 
-## 🔄 持续改进
+class ParseError(SearchError):
+    """Parsing-related errors"""
+    pass
 
-### 1. 学习机制
-- **成功案例学习**: 从成功解决问题中学习
-- **失败分析**: 分析失败原因并改进
-- **用户反馈**: 基于用户反馈优化算法
+class RateLimitError(SearchError):
+    """Rate limiting errors"""
+    pass
+```
 
-### 2. 知识更新
-- **定期更新**: 每周更新知识库
-- **趋势跟踪**: 跟踪技术发展趋势
-- **最佳实践**: 收集行业最佳实践
+### Error Recovery
+```python
+def safe_search_with_retry(query, max_retries=3):
+    """Search with automatic retry"""
+    for attempt in range(max_retries):
+        try:
+            return perform_search(query)
+        except (NetworkError, RateLimitError) as e:
+            if attempt == max_retries - 1:
+                raise
+            wait_time = 2 ** attempt  # Exponential backoff
+            time.sleep(wait_time)
+    return None
+```
 
-### 3. 性能监控
-- **实时监控**: 监控搜索和解决性能
-- **瓶颈识别**: 自动识别性能瓶颈
-- **优化建议**: 生成优化建议报告
+### User-Friendly Error Messages
+```python
+ERROR_MESSAGES = {
+    "NETWORK_ERROR": {
+        "user": "Network connection failed. Please check your connection and try again.",
+        "developer": "Failed to connect to search API",
+        "suggestions": ["Check internet connection", "Try again later"]
+    },
+    "NO_RESULTS": {
+        "user": "No results found for your query. Try different keywords.",
+        "developer": "Search returned empty results",
+        "suggestions": ["Use more specific keywords", "Try broader search"]
+    }
+}
+```
 
-## ⚠️ 注意事项
+## 💬 User Feedback Mechanism
 
-### 1. 安全考虑
-- **隐私保护**: 不搜索敏感个人信息
-- **内容审核**: 过滤不当或有害内容
-- **版权尊重**: 尊重知识产权
+### Feedback Collection
+```python
+class FeedbackCollector:
+    def __init__(self):
+        self.feedback_db = []
+    
+    def collect_feedback(self, user_id, query, solution, rating, comments=None):
+        """Collect user feedback"""
+        feedback = {
+            "user_id": user_id,
+            "query": query,
+            "solution_id": solution.get("id"),
+            "rating": rating,  # 1-5 stars
+            "comments": comments,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+        self.feedback_db.append(feedback)
+        self.analyze_feedback_trends()
+        
+        return feedback
+```
 
-### 2. 伦理考虑
-- **偏见避免**: 避免搜索结果中的偏见
-- **透明度**: 明确说明信息来源
-- **责任归属**: 明确AI辅助决策的责任
+### Feedback Analysis
+```python
+def analyze_feedback(self):
+    """Analyze feedback for improvements"""
+    if not self.feedback_db:
+        return {"message": "No feedback yet"}
+    
+    # Calculate average rating
+    ratings = [f["rating"] for f in self.feedback_db]
+    avg_rating = sum(ratings) / len(ratings)
+    
+    # Identify common issues
+    common_complaints = self._extract_common_themes(
+        [f["comments"] for f in self.feedback_db if f["comments"]]
+    )
+    
+    return {
+        "total_feedback": len(self.feedback_db),
+        "average_rating": avg_rating,
+        "common_issues": common_complaints,
+        "satisfaction_rate": len([r for r in ratings if r >= 4]) / len(ratings) * 100
+    }
+```
 
-### 3. 技术限制
-- **依赖外部API**: 搜索功能依赖外部服务
-- **网络延迟**: 可能受网络条件影响
-- **信息时效性**: 搜索结果可能有过时信息
+## 🧪 A/B Testing Framework
 
-## 🎯 技能优势
+### Test Implementation
+```python
+class ABTest:
+    def __init__(self, test_id, variants):
+        self.test_id = test_id
+        self.variants = variants
+        self.assigned = {}
+        self.results = {v: [] for v in variants}
+    
+    def assign_variant(self, user_id):
+        """Assign user to a test variant"""
+        if user_id not in self.assigned:
+            import random
+            variant = random.choice(list(self.variants.keys()))
+            self.assigned[user_id] = variant
+        return self.assigned[user_id]
+    
+    def record_result(self, user_id, metric, value):
+        """Record test result"""
+        if user_id in self.assigned:
+            variant = self.assigned[user_id]
+            self.results[variant].append({
+                "user_id": user_id,
+                "metric": metric,
+                "value": value,
+                "timestamp": datetime.now().isoformat()
+            })
+    
+    def analyze(self):
+        """Analyze test results"""
+        analysis = {}
+        for variant, results in self.results.items():
+            if results:
+                analysis[variant] = {
+                    "sample_size": len(results),
+                    "average_value": sum(r["value"] for r in results) / len(results),
+                    "success_rate": len([r for r in results if r["value"] > 0.7]) / len(results) * 100
+                }
+        return analysis
+```
 
-### 1. 效率提升
-- **自动化搜索**: 减少手动搜索时间
-- **智能分析**: 自动分析问题本质
-- **多方案对比**: 快速生成多个解决方案
+## 📊 Performance Monitoring
 
-### 2. 质量保证
-- **多源验证**: 交叉验证信息准确性
-- **风险评估**: 提前识别潜在风险
-- **最佳实践**: 基于行业最佳实践
+### Metrics Collection
+```python
+class PerformanceMonitor:
+    def __init__(self):
+        self.metrics = {
+            "search_time": [],
+            "success_rate": [],
+            "cache_hit_rate": [],
+            "error_rate": []
+        }
+    
+    def record_metric(self, metric_name, value):
+        """Record performance metric"""
+        if metric_name in self.metrics:
+            self.metrics[metric_name].append({
+                "value": value,
+                "timestamp": datetime.now().isoformat()
+            })
+        
+        # Keep only last 1000 measurements
+        if len(self.metrics[metric_name]) > 1000:
+            self.metrics[metric_name] = self.metrics[metric_name][-1000:]
+    
+    def get_report(self):
+        """Generate performance report"""
+        report = {}
+        for metric_name, measurements in self.metrics.items():
+            if measurements:
+                values = [m["value"] for m in measurements]
+                report[metric_name] = {
+                    "count": len(values),
+                    "average": sum(values) / len(values),
+                    "min": min(values),
+                    "max": max(values),
+                    "latest": values[-1] if values else None
+                }
+        return report
+```
 
-### 3. 可扩展性
-- **模块化设计**: 易于添加新功能
-- **知识库扩展**: 支持自定义知识库
-- **API集成**: 支持与其他系统集成
+## 🔌 Integration Examples
+
+### OpenClaw Full Integration
+```python
+#!/usr/bin/env python3
+"""
+autonomous_search_openclaw.py
+Full OpenClaw integration example
+"""
+
+import json
+import logging
+from datetime import datetime
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class AutonomousSearchOpenClaw:
+    def __init__(self):
+        self.config = self._load_config()
+        self.search_history = []
+        self.performance_monitor = PerformanceMonitor()
+    
+    def handle_openclaw_request(self, request_json):
+        """Handle OpenClaw request"""
+        try:
+            request = json.loads(request_json)
+            
+            # Validate request
+            if not request.get("query"):
+                return self._error_response("Missing query")
+            
+            # Start timing
+            start_time = datetime.now()
+            
+            # Process request
+            result = self._process_request(request)
+            
+            # Record performance
+            processing_time = (datetime.now() - start_time).total_seconds()
+            self.performance_monitor.record_metric("processing_time", processing_time)
+            
+            return json.dumps(result)
+            
+        except Exception as e:
+            logger.error(f"Request failed: {e}")
+            return self._error_response(str(e))
+    
+    def _process_request(self, request):
+        """Process search request"""
+        query = request["query"]
+        context = request.get("context", "")
+        
+        # 1. Analyze problem
+        analysis = self._analyze_problem(query, context)
+        
+        # 2. Search for solutions
+        search_results = self._search_solutions(analysis)
+        
+        # 3. Generate solutions
+        solutions = self._generate_solutions(search_results, analysis)
+        
+        # 4. Prepare response
+        response = {
+            "success": True,
+            "query": query,
+            "analysis": analysis,
+            "solutions": solutions,
+            "performance": {
+                "search_count": len(search_results),
+                "solution_count": len(solutions)
+            },
+            "metadata": {
+                "timestamp": datetime.now().isoformat(),
+                "skill_version": "1.0.0"
+            }
+        }
+        
+        return response
+    
+    def _error_response(self, error_message):
+        """Generate error response"""
+        return json.dumps({
+            "success": False,
+            "error": error_message,
+            "timestamp": datetime.now().isoformat()
+        })
+```
+
+### Web API Integration
+```python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+searcher = AutonomousSearchOpenClaw()
+
+@app.route('/search', methods=['POST'])
+def search():
+    """Search endpoint"""
+    data = request.json
+    result = searcher.handle_openclaw_request(json.dumps(data))
+    return jsonify(json.loads(result))
+
+@app.route('/health', methods=['GET'])
+def health():
+    """Health check endpoint"""
+    return jsonify({
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat()
+    })
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+
+## 🧪 Testing Suite
+
+### Unit Tests
+```python
+import unittest
+from autonomous_search import AutonomousSearch
+
+class TestAutonomousSearch(unittest.TestCase):
+    def setUp(self):
+        self.searcher = AutonomousSearch()
+    
+    def test_basic_search(self):
+        result = self.searcher.search_solutions("test query")
+        self.assertIsInstance(result, list)
+    
+    def test_error_handling(self):
+        with self.assertRaises(ValueError):
+            self.searcher.search_solutions("")
+    
+    def test_performance(self):
+        import time
+        start = time.time()
+        self.searcher.search_solutions("performance test")
+        elapsed = time.time() - start
+        self.assertLess(elapsed, 5.0)  # Should complete in under 5 seconds
+```
+
+### Integration Tests
+```python
+class TestOpenClawIntegration(unittest.TestCase):
+    def test_openclaw_request(self):
+        searcher = AutonomousSearchOpenClaw()
+        request = {
+            "query": "How to fix Python import errors?",
+            "context": "Working on a Django project"
+        }
+        
+        result = searcher.handle_openclaw_request(json.dumps(request))
+        data = json.loads(result)
+        
+        self.assertTrue(data["success"])
+        self.assertIn("solutions", data)
+```
+
+## 📚 Documentation
+
+### API Documentation
+Complete API documentation with examples for all endpoints.
+
+### User Guide
+Step-by-step guide for users and developers.
+
+### Troubleshooting
+Common issues and solutions.
+
+### Changelog
+Version history and changes.
+
+## 🔒 Security Considerations
+
+### Data Protection
+- Encrypt sensitive data
+- Secure API keys
+- Regular security audits
+
+### Privacy
+- Anonymize user data
+- GDPR compliance
+- Data retention policies
+
+## 🚀 Deployment
+
+### Docker Deployment
+```dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]
+```
+
+### Cloud Deployment
+- AWS Lambda for serverless
+- Docker containers for scalability
+- Load balancing for high availability
+
+## 📞 Support
+
+### Getting Help
+- Documentation: https://docs.example.com
+- Community: https://community.example.com
+- Email: support@fabio2026-ui.com
+
+### Contributing
+- Submit issues on GitHub
+- Create pull requests
+- Join the community
 
 ---
 
-**版本**: 1.0.0  
-**创建日期**: 2026-04-03  
-**最后更新**: 2026-04-03  
-**状态**: 开发完成，等待测试
+**Last Updated**: 2026-04-03  
+**Version**: 1.0.0  
+**Author**: fabio2026-ui  
+**License**: MIT

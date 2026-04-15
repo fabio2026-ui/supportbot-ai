@@ -1,0 +1,37 @@
+{
+  "public_ip": "178.104.109.237",
+  "ports_to_open": [
+    {
+      "port": 8082,
+      "service": "AI游戏商店",
+      "protocol": "tcp"
+    },
+    {
+      "port": 5010,
+      "service": "支付系统",
+      "protocol": "tcp"
+    },
+    {
+      "port": 5020,
+      "service": "实时演示系统",
+      "protocol": "tcp"
+    },
+    {
+      "port": 80,
+      "service": "HTTP",
+      "protocol": "tcp"
+    },
+    {
+      "port": 443,
+      "service": "HTTPS",
+      "protocol": "tcp"
+    }
+  ],
+  "security_group_rules": [
+    "允许所有IP访问端口8082 (游戏商店)",
+    "允许所有IP访问端口5010 (支付系统)",
+    "允许所有IP访问端口5020 (演示系统)",
+    "限制SSH端口22仅允许特定IP",
+    "启用DDoS防护"
+  ]
+}

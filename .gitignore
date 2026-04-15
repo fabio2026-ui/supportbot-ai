@@ -1,11 +1,100 @@
-# 排除嵌套Git仓库
-github-repos/
-llama.cpp/
-turboquant/
-ai-venv/
+# Python
 __pycache__/
-*.pyc
-*.db
-*.log
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
 .env
-EOF && echo "✅ .gitignore已创建" && echo "" && echo "添加主要文件..." && git add AGENTS.md SOUL.md USER.md TOOLS.md MEMORY.md HEARTBEAT.md IDENTITY.md BOOTSTRAP.md supportbot_ai.html README.md && echo "✅ 主要文件已添加" && echo "" && echo "提交更改..." && git commit -m "Initial commit: Core workspace files and SupportBot AI"
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Secrets
+*.pem
+*.key
+*.cert
+secrets/
+credentials/
+config.local.*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Media files (large)
+*.mp4
+*.avi
+*.mov
+*.wav
+*.mp3
+
+# Test outputs
+test_output/
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Package manager
+Pipfile
+Pipfile.lock
+poetry.lock
+pyproject.toml
+
+# OpenClaw specific
+.openclaw/media/
+.openclaw/cache/
+.openclaw/logs/
+
+# Project specific
+cached_results/
+processed_images/
+uploads/
