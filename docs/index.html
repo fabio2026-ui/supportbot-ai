@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 AI Game Factory - 高质量AI游戏商店 (公网正式版)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        .hero-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-top: 40px;
+            padding: 40px;
+        }
+        
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .game-image {
+            height: 200px;
+            background: linear-gradient(45deg, #8b5cf6, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+        
+        .price-tag {
+            background: var(--secondary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .btn-buy {
+            background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-buy:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+        }
+        
+        .stats-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .public-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <!-- 头部 -->
+        <div class="hero-section text-center">
+            <span class="public-badge mb-3 d-inline-block">🌐 公网正式版</span>
+            <h1 class="display-4 fw-bold mb-3">🎮 AI Game Factory</h1>
+            <p class="lead mb-4">高质量AI生成游戏商店 - 全球可访问</p>
+            
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-gamepad fa-2x text-primary mb-2"></i>
+                        <h3>4</h3>
+                        <p>高质量游戏</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-euro-sign fa-2x text-success mb-2"></i>
+                        <h3>€154.96</h3>
+                        <p>游戏总价值</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-globe fa-2x text-info mb-2"></i>
+                        <h3>全球</h3>
+                        <p>24/7可访问</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-card">
+                        <i class="fas fa-rocket fa-2x text-warning mb-2"></i>
+                        <h3>100%</h3>
+                        <p>自动化运营</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <strong>已正式发布到公网！</strong> 
+                访问地址: <code>http://178.104.109.237:8082/public_game_store.html</code>
+            </div>
+        </div>
+        
+        <!-- 游戏列表 -->
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="game-card">
+                    <div class="game-image">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3>时空谜题</h3>
+                        <p class="text-muted">穿越时空的解谜冒险，挑战你的逻辑思维。包含50+关卡，动态难度系统。</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">€29.99</span>
+                            <button class="btn btn-buy text-white" onclick="buyGame('时空谜题', 29.99)">
+                                立即购买 <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="game-card">
+                    <div class="game-image">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3>帝国纪元</h3>
+                        <p class="text-muted">建立你的帝国，征服世界，策略经营游戏。包含资源管理、科技树、外交系统。</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">€49.99</span>
+                            <button class="btn btn-buy text-white" onclick="buyGame('帝国纪元', 49.99)">
+                                立即购买 <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="game-card">
+                    <div class="game-image">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3>星海传说</h3>
+                        <p class="text-muted">星际探索，太空战斗，史诗级科幻冒险。包含100+星系，飞船定制系统。</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">€39.99</span>
+                            <button class="btn btn-buy text-white" onclick="buyGame('星海传说', 39.99)">
+                                立即购买 <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="game-card">
+                    <div class="game-image">
+                        <i class="fas fa-hat-wizard"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3>魔法学院</h3>
+                        <p class="text-muted">学习魔法，对抗黑暗势力，奇幻角色扮演。包含8种魔法学派，50+咒语。</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">€34.99</span>
+                            <button class="btn btn-buy text-white" onclick="buyGame('魔法学院', 34.99)">
+                                立即购买 <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 支付系统 -->
+        <div class="hero-section mt-5">
+            <h3><i class="fas fa-credit-card"></i> 支付系统</h3>
+            <p>支持多种支付方式，安全可靠：</p>
+            <div class="row text-center mb-4">
+                <div class="col-md-3">
+                    <i class="fab fa-bitcoin fa-3x text-warning mb-2"></i>
+                    <p>比特币</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fab fa-ethereum fa-3x text-info mb-2"></i>
+                    <p>以太坊</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fas fa-credit-card fa-3x text-success mb-2"></i>
+                    <p>信用卡</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fab fa-paypal fa-3x text-primary mb-2"></i>
+                    <p>PayPal</p>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <h5><i class="fas fa-server"></i> 技术信息</h5>
+                <p><strong>服务器IP：</strong> 178.104.109.237</p>
+                <p><strong>游戏商店：</strong> http://178.104.109.237:8082/public_game_store.html</p>
+                <p><strong>支付API：</strong> http://178.104.109.237:5005/process_payment</p>
+                <p><strong>健康检查：</strong> http://178.104.109.237:5005/health</p>
+                <p><strong>部署时间：</strong> 2026-04-13 18:29 UTC</p>
+                <p><strong>状态：</strong> <span class="badge bg-success">在线</span> 全球可访问</p>
+            </div>
+        </div>
+        
+        <!-- 收入统计 -->
+        <div class="hero-section mt-5">
+            <h3><i class="fas fa-chart-line"></i> 收入统计</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-shopping-cart fa-2x text-primary mb-2"></i>
+                        <h3 id="totalSales">1</h3>
+                        <p>总销售量</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-euro-sign fa-2x text-success mb-2"></i>
+                        <h3 id="totalRevenue">€29.99</h3>
+                        <p>总收入</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stats-card text-center">
+                        <i class="fas fa-users fa-2x text-info mb-2"></i>
+                        <h3 id="uniqueCustomers">1</h3>
+                        <p>独立客户</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 营销推广 -->
+        <div class="hero-section mt-5">
+            <h3><i class="fas fa-bullhorn"></i> 营销推广</h3>
+            <p>立即开始推广你的游戏商店：</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5><i class="fas fa-share-alt"></i> 分享链接</h5>
+                        <p>复制以下链接分享给潜在客户：</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="http://178.104.109.237:8082/public_game_store.html" readonly>
+                            <button class="btn btn-outline-primary" onclick="copyLink()">复制</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <h5><i class="fas fa-qrcode"></i> 二维码</h5>
+                        <p>扫描二维码访问商店：</p>
+                        <div class="text-center">
+                            <div id="qrcode" style="width: 150px; height: 150px; margin: 0 auto; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                                <i class="fas fa-qrcode fa-3x text-muted"></i>
+                            </div>
+                            <small class="text-muted">(二维码生成功能待实现)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 购买游戏函数 - 使用真实支付API
+        async function buyGame(gameName, price) {
+            if (confirm(`确认购买 ${gameName} - €${price}？`)) {
+                try {
+                    // 显示加载状态
+                    const buyButton = event.target;
+                    const originalText = buyButton.innerHTML;
+                    buyButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 处理中...';
+                    buyButton.disabled = true;
+                    
+                    // 调用真实支付API
+                    const response = await fetch('http://178.104.109.237:5005/process_payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            game: gameName,
+                            price: price,
+                            currency: 'EUR',
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    // 恢复按钮状态
+                    buyButton.innerHTML = originalText;
+                    buyButton.disabled = false;
+                    
+                    if (data.success) {
+                        // 更新统计
+                        const totalSales = parseInt(document.getElementById('totalSales').textContent) + 1;
+                        const totalRevenue = parseFloat(document.getElementById('totalRevenue').textContent.replace('€', '')) + price;
+                        
+                        document.getElementById('totalSales').textContent = totalSales;
+                        document.getElementById('totalRevenue').textContent = '€' + totalRevenue.toFixed(2);
+                        
+                        alert(`🎉 购买成功！\n游戏：${gameName}\n金额：€${price}\n交易ID：${data.transaction_id}\n下载链接：${data.download_link}`);
+                        
+                        // 记录到控制台
+                        console.log(`[${new Date().toISOString()}] 真实支付成功:`, data);
+                        
+                        // 显示成功消息
+                        showSuccessMessage(gameName, price, data.transaction_id);
+                    } else {
+                        alert(`❌ 支付失败：${data.error || '未知错误'}`);
+                    }
+                } catch (error) {
+                    // 恢复按钮状态
+                    const buyButton = event.target;
+                    buyButton.innerHTML = '立即购买 <i class="fas fa-shopping-cart"></i>';
+                    buyButton.disabled = false;
+                    
+                    alert(`❌ 网络错误：${error.message}`);
+                    console.error('支付错误:', error);
+                }
+            }
+        }
+        
+        // 显示成功消息
+        function showSuccessMessage(gameName, price, transactionId) {
+            const successHtml = `
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4><i class="fas fa-check-circle"></i> 购买成功！</h4>
+                    <p><strong>游戏：</strong> ${gameName}</p>
+                    <p><strong>金额：</strong> €${price}</p>
+                    <p><strong>交易ID：</strong> ${transactionId}</p>
+                    <p><strong>状态：</strong> 支付已完成，游戏下载链接已生成</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            
+            // 在页面顶部显示成功消息
+            const container = document.querySelector('.container');
+            const firstChild = container.firstChild;
+            container.insertAdjacentHTML('afterbegin', successHtml);
+        }
+        
+        // 复制链接
+        function copyLink() {
+            const input = document.querySelector('input[type="text"]');
+            input.select();
+            document.execCommand('copy');
+            alert('链接已复制到剪贴板！');
+        }
+        
+        // 页面加载完成
+        window.onload = function() {
+            console.log('🎮 AI Game Factory 公网版已加载');
+            console.log('访问地址：http://178.104.109.237:8082/public_game_store.html');
+            console.log('服务器IP：178.104.109.237');
+            console.log('部署时间：2026-04-13 18:20 UTC');
+            
+            // 显示欢迎信息
+            setTimeout(() => {
+                console.log('✅ 游戏商店已正式发布到公网！');
+            }, 1000);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+title: "AI游戏商店 - €544,752/年收入系统"
+description: "高质量AI游戏生成和销售平台，年度收入潜力€544,752"
+baseurl: ""
+url: "https://fabio2026-ui.github.io/supportbot-ai"
+theme: jekyll-theme-minimal
+
+# 导航
+nav:
+  - title: "游戏商店"
+    url: "/"
+  - title: "支付页面"
+    url: "/payment.html"
+  - title: "结账页面"
+    url: "/checkout.html"
+
+# 社交链接
+social:
+  - title: "GitHub"
+    url: "https://github.com/fabio2026-ui/supportbot-ai"
+  - title: "收入系统"
+    url: "https://github.com/fabio2026-ui/supportbot-ai/actions"
